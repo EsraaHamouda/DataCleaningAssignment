@@ -11,8 +11,8 @@ the following is the data related to the training population which is loaded fro
 subject_train  --> subject IDs for the train data
 x_train        --> the actual values for the train data 
 y_train        --> IDs  for the train data
+I tried to write every result to csv file to verify the data content
 
- I tried to write every result to csv file to verify the data content
  Step2: Extracts only the measurements on the mean and standard deviation for each measurement.
 --------------------------
 meanCols --> data frame that contains only data related to mean
