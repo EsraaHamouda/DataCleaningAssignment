@@ -36,4 +36,4 @@ std -> to stabdard deviation
 Step7: From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 -------------------------
 
-Finally I applied some statistics to the data and write it to file called statistics
+Finally getting the mean of all labels
