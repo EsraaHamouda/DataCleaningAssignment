@@ -1,23 +1,23 @@
 ##########step1###################
 
 #load test data
-subject_test <- read.table(" /UCI HAR Dataset/test/subject_test.txt" )
-x_test <- read.table(" /UCI HAR Dataset/test/X_test.txt" )
-y_test <- read.table(" /UCI HAR Dataset/test/y_test.txt" )
+subject_test <- read.table("D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/test/subject_test.txt" )
+x_test <- read.table("D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/test/X_test.txt" )
+y_test <- read.table("D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/test/y_test.txt" )
 #load train data
-subject_train <- read.table(" /UCI HAR Dataset/train/subject_train.txt" )
-x_train <- read.table(" /UCI HAR Dataset/train/X_train.txt" )
-y_train <- read.table(" /UCI HAR Dataset/train/y_train.txt" )
+subject_train <- read.table("D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/train/subject_train.txt" )
+x_train <- read.table("D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/train/X_train.txt" )
+y_train <- read.table("D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/train/y_train.txt" )
 
 X <- rbind(x_train, x_test)
-#write.csv(X, " /UCI HAR Dataset/X.csv", row.names=TRUE)
+#write.csv(X, "D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/X.csv", row.names=TRUE)
 
 
 # 
-features_names <- read.table(" /UCI HAR Dataset/features.txt" )
+features_names <- read.table("D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/features.txt" )
 
 
-#write.csv(X, " /UCI HAR Dataset/Xcol.csv", row.names=TRUE)
+#write.csv(X, "D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/Xcol.csv", row.names=TRUE)
 # names(x_test)<- features_names
 #  
 
@@ -32,7 +32,7 @@ WholeData <- cbind(MergedSubject, MergedX, MergedY)
 # names(WholeData)  <- features_names$V2
 ncol(WholeData)
 
-write.csv(WholeData, " /UCI HAR Dataset/WholeData.csv", row.names=TRUE)
+write.csv(WholeData, "D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/WholeData.csv", row.names=TRUE)
 ############step2#################################
 
 names(WholeData)[1] <- "Label"
@@ -51,12 +51,12 @@ CombinedDataSet<-cbind(lable, meanCols, stdCols)
 ncol(CombinedDataSet)
 
 
-write.csv(CombinedDataSet, " /UCI HAR Dataset/CombinedDataSet.csv", row.names=TRUE)
+write.csv(CombinedDataSet, "D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/CombinedDataSet.csv", row.names=TRUE)
 
 
 ################step3###############################
 
-activities <- read.table(" /UCI HAR Dataset/activity_labels.txt")
+activities <- read.table("D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/activity_labels.txt")
 names(activities) 
 
 CombinedDataSet$lable<- activities[CombinedDataSet$lable, 2]
@@ -75,7 +75,11 @@ names(CombinedDataSet) <- gsub("-std","StandardDeviation",names(CombinedDataSet)
 
 ##################step5###########################
 
-write.csv(CombinedDataSet, " /UCI HAR Dataset/CombinedDataSet.csv", row.names=TRUE)
-statistics<-summary(CombinedDataSet)
+write.csv(CombinedDataSet, "D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/CombinedDataSet.csv", row.names=TRUE)
+# statistics<-summary(CombinedDataSet)
+library(plyr)
+tidy_data<- ddply(CombinedDataSet, c("lable" ), numcolwise(mean))
+
  
-write(statistics, " /UCI HAR Dataset/statistics.txt")
+write.table(tidy_data, file = "D:/DataSienceCoursera/Crs3/getdata_projectfiles_UCI HAR Dataset (1)/UCI HAR Dataset/tidy_data.txt")
+ 
